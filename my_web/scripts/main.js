@@ -1,0 +1,71 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // 打字机效果
+    const typewriterElement = document.querySelector('.typewriter');
+    const text = "Hi, I'm Yide Lin";
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            typewriterElement.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, 125); // 可以调整打字速度
+        }
+    }
+
+    // 开始打字效果
+    type();
+
+    // 其他动画效果
+    setTimeout(() => {
+        document.querySelector('.subtitle').style.opacity = '1';
+        document.querySelector('.subtitle').style.transform = 'translateY(0)';
+    }, 2000);
+
+    setTimeout(() => {
+        document.querySelector('.subtitle-cn').style.opacity = '1';
+        document.querySelector('.subtitle-cn').style.transform = 'translateY(0)';
+    }, 2500);
+
+    setTimeout(() => {
+        document.querySelector('.about-me-container').style.opacity = '1';
+        document.querySelector('.about-me-container').style.transform = 'translateY(0)';
+    }, 3500);
+
+    setTimeout(() => {
+        document.querySelector('.channel-container').style.opacity = '1';
+        document.querySelector('.channel-container').style.transform = 'translateY(0)';
+    }, 4000);
+
+    // 登录相关代码
+    const loginButton = document.getElementById('loginButton');
+    const loginModal = document.getElementById('loginModal');
+    const closeButton = document.querySelector('.close-button');
+    
+    loginButton.addEventListener('click', () => {
+        loginModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeButton.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    window.addEventListener('click', (event) => {
+        if (event.target === loginModal) {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    const loginButtons = document.querySelectorAll('.login-btn');
+    loginButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.classList.contains('github')) {
+                console.log('GitHub login');
+            } else if (button.classList.contains('google')) {
+                console.log('Google login');
+            }
+        });
+    });
+}); 

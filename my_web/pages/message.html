@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board - Yide Lin</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/message.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="../assets/avatar.jpg" alt="头像" class="avatar">
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="project.html">Project</a>
+            <a href="message.html" class="active">Message</a>
+        </div>
+        <div class="nav-social">
+            <a href="https://github.com/yourusername" target="_blank" class="github-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <div class="login-avatar" id="loginButton">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 登录弹窗 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Welcome Back</h2>
+            <p class="modal-subtitle">Sign in to yidelin.me</p>
+            
+            <div class="login-buttons">
+                <button class="login-btn github">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </button>
+                <button class="login-btn google">
+                    <i class="fab fa-google"></i>
+                    <span>Google</span>
+                </button>
+            </div>
+            
+            <div class="signup-prompt">
+                <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+            </div>
+            
+            <div class="secured-by">
+                <p>Secured by <img src="../assets/clerk.svg" alt="Clerk" class="clerk-logo"></p>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="page-title">Message</h1>
+    <p class="page-subtitle">Feel free to say something!</p>
+
+    <main class="content-container">
+        <div class="message-board">
+            <div class="message-input-section">
+                <div class="message-input-container">
+                    <textarea placeholder="Leave a message" class="message-input"></textarea>
+                </div>
+                <div class="name-input-container">
+                    <label for="name-input">NAME</label>
+                    <input type="text" id="name-input" class="name-input" placeholder="Anonymous">
+                </div>
+                <button class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <div class="messages-list">
+                <!-- 消息将通过 JavaScript 动态添加 -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Yide Lin. All rights reserved.</p>
+        <p>Made with Passion and 🍪</p>
+    </footer>
+
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/message.js"></script>
+</body>
+</html> 
