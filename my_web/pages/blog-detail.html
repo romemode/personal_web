@@ -58,13 +58,20 @@
                     <path class="flight-line" d="M100,200 Q600,50 1100,200" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="10,10"/>
                     <!-- 飞机图标 -->
                     <g class="plane-group">
-                        <path class="plane" d="M0,0" fill="white">
-                            <animateMotion dur="5s" repeatCount="indefinite">
-                                <mpath href=".flight-line"/>
+                        <!-- 飞机路径，用于动画轨迹 -->
+                        <path id="planePath" d="M100,200 Q600,50 1100,200" fill="none" stroke="transparent" />
+                    
+                        <g id="airplane" transform="scale(1)">
+                            <foreignObject x="-15" y="-15" width="30" height="30">
+                                <div xmlns="http://www.w3.org/1999/xhtml">
+                                    <i class="fas fa-plane" style="font-size:30px; color:white;"></i>
+                                </div>
+                            </foreignObject>
+                            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
+                                <mpath xlink:href="#planePath" />
                             </animateMotion>
-                        </path>
-                        <i class="fas fa-plane"></i>
-                    </g>
+                        </g>
+                    </g>               
                 </svg>
             </div>
             <div class="map-section right">
