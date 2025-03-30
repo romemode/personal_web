@@ -162,3 +162,61 @@
         stroke-dashoffset: -20;
     }
 }
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .map-container {
+    flex-direction: column;
+    height: auto;
+    position: static;
+    margin-bottom: 40px;
+  }
+
+  .map-section {
+    width: 100%;
+    justify-content: center !important;
+    padding: 0;
+    height: auto;
+  }
+
+  .map {
+    width: 90vw;
+    max-width: 400px;
+  }
+
+  .map-connection {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+  }
+
+  .flight-path-svg {
+    width: 100%;
+    height: 200px;
+  }
+
+  .fa-plane {
+    font-size: 16px;
+    top: 45%;
+  }
+
+  .blog-detail-container {
+    margin-top: 100px;
+    padding: 0 10px;
+  }
+
+  .blog-info h1 {
+    font-size: 1.5em;
+  }
+
+  .tag {
+    font-size: 0.9em;
+  }
+
+  .back-button {
+    top: 60px;
+    left: 15px;
+    padding: 8px 16px;
+  }
+}
