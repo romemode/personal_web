@@ -70,7 +70,6 @@
     margin-bottom: 20px;
 }
 
-/* 地图容器样式 */
 .map-container {
     position: fixed;
     top: 0;
@@ -111,7 +110,6 @@
     mix-blend-mode: soft-light;
 }
 
-/* 航线容器样式 */
 .map-connection {
     position: fixed;
     top: 0;
@@ -125,33 +123,12 @@
     z-index: -1;
 }
 
-/* SVG 样式 */
 .flight-path-svg {
     width: 100%;
     height: 400px;
     overflow: visible;
 }
 
-/* 飞机图标样式 */
-.fa-plane {
-    position: absolute;
-    top: 41.55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 24px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    animation: rotatePlane 5s linear infinite;
-}
-
-/* 飞机旋转动画 */
-@keyframes rotatePlane {
-    0% { transform: translate(-50%, -50%) rotate(15deg); }
-    50% { transform: translate(-50%, -50%) rotate(-15deg); }
-    100% { transform: translate(-50%, -50%) rotate(15deg); }
-}
-
-/* 虚线动画 */
 .flight-line {
     stroke-dasharray: 10;
     animation: dash 1s linear infinite;
@@ -163,7 +140,6 @@
     }
 }
 
-/* 移动端适配 */
 @media (max-width: 768px) {
   .map-container {
     flex-direction: column;
@@ -194,11 +170,6 @@
   .flight-path-svg {
     width: 100%;
     height: 200px;
-  }
-
-  .fa-plane {
-    font-size: 16px;
-    top: 45%;
   }
 
   .blog-detail-container {
