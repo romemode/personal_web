@@ -1,90 +1,114 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About me more - Yide Lin</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/blog-detail.css">
-    <link rel="stylesheet" href="../styles/modal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About me more - Yide Lin</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/blog-detail.css">
+  <link rel="stylesheet" href="../styles/modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="background-overlay"></div>
-    
-    <nav class="navbar">
-        <div class="nav-logo">
-            <img src="../assets/avatar.jpg" alt="头像" class="avatar">
-        </div>
-        <div class="nav-links">
-            <a href="../index.html">Home</a>
-            <a href="blog.html" class="active">Blog</a>
-            <a href="project.html">Project</a>
-            <a href="message.html">Message</a>
-        </div>
-        <div class="nav-social">
-            <a href="https://github.com/romemode" target="_blank" class="github-icon">
-                <i class="fab fa-github"></i>
-            </a>
-            <div class="login-avatar" id="loginButton">
-                <i class="fas fa-user"></i>
-            </div>
-        </div>
-    </nav>
+  <div class="background-overlay"></div>
+  
+  <nav class="navbar">
+    <div class="nav-logo">
+      <img src="../assets/avatar.jpg" alt="头像" class="avatar">
+    </div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="project.html">Project</a>
+      <a href="message.html">Message</a>
+    </div>
+    <div class="nav-social">
+      <a href="https://github.com/romemode" target="_blank" class="github-icon">
+        <i class="fab fa-github"></i>
+      </a>
+      <div class="login-avatar" id="loginButton">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </nav>
 
-    <div class="back-button" onclick="window.history.back()">
-        <i class="fas fa-arrow-left"></i> Back
+  <div class="back-button" onclick="window.history.back()">
+    <i class="fas fa-arrow-left"></i> Back
+  </div>
+
+  <main class="blog-detail-container">
+    <div class="blog-header">
+      <img src="../assets/avatar.jpg" alt="Avatar" class="author-avatar">
+      <div class="blog-info">
+        <h1>Hi, I'm Yide Lin</h1>
+        <div class="blog-meta">
+          <span class="tag">#Yide</span>
+          <span class="tag">#About</span>
+        </div>
+      </div>
     </div>
 
-    <main class="blog-detail-container">
-        <div class="blog-header">
-            <img src="../assets/avatar.jpg" alt="Avatar" class="author-avatar">
-            <div class="blog-info">
-                <h1>Hi, I'm Yide Lin</h1>
-                <div class="blog-meta">
-                    <span class="tag">#Yide</span>
-                    <span class="tag">#About</span>
+    <div class="map-container">
+      <div class="map-section left">
+        <img src="../assets/maps/china-map.png" alt="China Map" class="map china">
+      </div>
+      <div class="map-connection">
+        <svg class="flight-path-svg" viewBox="0 0 1200 400">
+          <!-- 弧形虚线路径 -->
+          <path class="flight-line" d="M100,200 Q600,50 1100,200" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="10,10"/>
+          <!-- 飞机图标 -->
+          <g class="plane-group">
+            <path id="planePath" d="M100,200 Q600,50 1100,200" fill="none" stroke="transparent" />
+            <g id="airplane" transform="translate(0,0)">
+              <foreignObject x="-30" y="-30" width="60" height="60">
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                  <i class="fas fa-plane plane-icon"></i>
                 </div>
-            </div>
-        </div>
+              </foreignObject>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="map-section right">
+        <img src="../assets/maps/usa-map.png" alt="USA Map" class="map usa">
+      </div>
+    </div>
+  </main>
 
-        <div class="map-container">
-            <div class="map-section left">
-                <img src="../assets/maps/china-map.png" alt="China Map" class="map china">
-            </div>
-            <div class="map-connection">
-                <svg class="flight-path-svg" viewBox="0 0 1200 400">
-                    <!-- 弧形虚线路径 -->
-                    <path class="flight-line" d="M100,200 Q600,50 1100,200" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="10,10"/>
-                    <!-- 飞机图标 -->
-                    <g class="plane-group">
-                        <!-- 飞机路径，用于动画轨迹 -->
-                        <path id="planePath" d="M100,200 Q600,50 1100,200" fill="none" stroke="transparent" />
-                    
-                        <g id="airplane" transform="scale(1)">
-                            <foreignObject x="-25" y="-25" width="50" height="50">
-                                <div xmlns="http://www.w3.org/1999/xhtml">
-                                    <i class="fas fa-plane" style="font-size:40px; color:white; transform: rotate(360deg);"></i>
-                                </div>
-                            </foreignObject>
-                            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
-                                <mpath xlink:href="#planePath" />
-                            </animateMotion>
-                        </g>
-                    </g>               
-                </svg>
-            </div>
-            <div class="map-section right">
-                <img src="../assets/maps/usa-map.png" alt="USA Map" class="map usa">
-            </div>
-        </div>
-    </main>
+  <footer class="footer">
+    <p>© 2025 Yide Lin. All rights reserved.</p>
+    <p>Made with Passion and 🍪</p>
+  </footer>
 
-    <footer class="footer">
-        <p>© 2025 Yide Lin. All rights reserved.</p>
-        <p>Made with Passion and 🍪</p>
-    </footer>
+  <script src="../scripts/auth.js"></script>
 
-    <script src="../scripts/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const path = document.getElementById('planePath');
+      const airplane = document.getElementById('airplane');
+      const totalLength = path.getTotalLength();
+
+      let t = 0;
+      const speed = 0.7;
+
+      function animatePlane() {
+        const point = path.getPointAtLength(t);
+        const pointAhead = path.getPointAtLength(Math.min(t + 1, totalLength));
+
+        const dx = pointAhead.x - point.x;
+        const dy = pointAhead.y - point.y;
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+        airplane.setAttribute('transform', `translate(${point.x}, ${point.y}) rotate(${angle})`);
+
+        t += speed;
+        if (t > totalLength) t = 0;
+
+        requestAnimationFrame(animatePlane);
+      }
+
+      animatePlane();
+    });
+  </script>
 </body>
-</html> 
+</html>
