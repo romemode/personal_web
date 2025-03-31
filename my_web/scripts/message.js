@@ -1,8 +1,6 @@
-// 引入 Firebase SDK（使用 ESM 模块）
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js';
 import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy } from 'https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js';
 
-// Firebase 配置（已根据你提供的配置填写）
 const firebaseConfig = {
     apiKey: "AIzaSyC5f7HOu--ecfKHVHHyh6190u1SGqu0r0",
     authDomain: "myweb-31c5c.firebaseapp.com",
@@ -12,12 +10,10 @@ const firebaseConfig = {
     appId: "1:700628302270:web:55dbf72a3883f91bc142ef"
 };
 
-// 初始化 Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messagesRef = collection(db, 'messages');
 
-// DOM 元素
 const messageInput = document.querySelector('.message-input');
 const nameInput = document.querySelector('.name-input');
 const sendButton = document.querySelector('.send-button');
