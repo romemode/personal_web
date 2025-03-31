@@ -25,7 +25,14 @@ const avatars = [
     '../assets/avatar2.jpg',
     '../assets/avatar3.jpg',
     '../assets/avatar4.jpg',
-    '../assets/avatar5.jpg'
+    '../assets/avatar5.jpg',
+    '../assets/avatar6.jpg',
+    '../assets/avatar7.jpg',
+    '../assets/avatar8.jpg',
+    '../assets/avatar9.jpg',
+    '../assets/avatar10.jpg',
+    '../assets/avatar11.jpg',
+    '../assets/avatar12.jpg',
 ];
 
 let lastAvatarIndex = -1;
