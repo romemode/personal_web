@@ -546,3 +546,64 @@ body {
     font-size: 0.9em;
 } 
 
+/* ========== Mobile Responsive Patch ========== */
+@media (max-width: 768px) {
+    /* 导航栏改为纵向布局 */
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+    }
+  
+    /* 导航链接换行、缩小 */
+    .nav-links {
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+  
+    .nav-links a {
+      font-size: 0.9em;
+      padding: 6px 10px;
+    }
+  
+    /* About Me 区域改为上下排布 */
+    .about-me-content {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .content-right {
+      width: 100px;
+      margin-top: 15px;
+    }
+  
+    /* 介绍文字缩小字体 */
+    .typewriter {
+      font-size: 2em;
+    }
+  
+    .subtitle {
+      font-size: 1.2em;
+    }
+  
+    .subtitle-cn {
+      font-size: 1em;
+    }
+  
+    /* 视频网格改为单列 */
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .video-info h3 {
+      font-size: 1em;
+    }
+  
+    .video-info p {
+      font-size: 0.85em;
+    }
+  }
+  
