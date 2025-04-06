@@ -1,189 +1,186 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yide Lin - 个人网站</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yide Lin - 个人网站</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="background-overlay"></div>
-    
-    <nav class="navbar">
-        <div class="nav-logo">
-            <img src="assets/avatar.jpg" alt="头像" class="avatar">
-        </div>
-        <div class="nav-links">
-            <a href="index.html" class="active">Home</a>
-            <a href="pages/blog.html">Blog</a>
-            <a href="pages/project.html">Project</a>
-            <a href="pages/message.html">Message</a>
-        </div>
-        <div class="nav-social">
-            <a href="https://github.com/romemode" target="_blank" class="github-icon">
-                <i class="fab fa-github"></i>
-            </a>
-            <div class="login-avatar" id="loginButton">
-                <i class="fas fa-user"></i>
-            </div>
-        </div>
-    </nav>
+  <div class="background-overlay"></div>
 
-    <!-- 登录弹窗 -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Welcome Back</h2>
-            <p class="modal-subtitle">Sign in to yidelin.me</p>
-            
-            <div class="login-buttons">
-                <button class="login-btn github">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                </button>
-                <button class="login-btn google">
-                    <i class="fab fa-google"></i>
-                    <span>Google</span>
-                </button>
-            </div>
-            
-            <div class="signup-prompt">
-                <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
-            </div>
-            
-            <div class="secured-by">
-                <p>Secured by <img src="assets/clerk.svg" alt="Clerk" class="clerk-logo"></p>
-            </div>
-        </div>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <img src="assets/avatar.jpg" alt="头像" class="avatar">
     </div>
 
-    <main class="home-content">
-        <div class="intro-section">
-            <div class="typewriter"></div>
-            <div class="subtitle">Every day is a second chance</div>
-            <div class="subtitle-cn">每一天都是新的开始</div>
+    <!-- ✅ 移动端菜单按钮 -->
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="nav-links" id="mobileMenu">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/blog.html">Blog</a>
+      <a href="pages/project.html">Project</a>
+      <a href="pages/message.html">Message</a>
+    </div>
+
+    <div class="nav-social">
+      <a href="https://github.com/romemode" target="_blank" class="github-icon">
+        <i class="fab fa-github"></i>
+      </a>
+      <div class="login-avatar" id="loginButton">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 登录弹窗 -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Welcome Back</h2>
+      <p class="modal-subtitle">Sign in to yidelin.me</p>
+
+      <div class="login-buttons">
+        <button class="login-btn github">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+        </button>
+        <button class="login-btn google">
+          <i class="fab fa-google"></i>
+          <span>Google</span>
+        </button>
+      </div>
+
+      <div class="signup-prompt">
+        <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+      </div>
+
+      <div class="secured-by">
+        <p>Secured by <img src="assets/clerk.svg" alt="Clerk" class="clerk-logo"></p>
+      </div>
+    </div>
+  </div>
+
+  <main class="home-content">
+    <div class="intro-section">
+      <div class="typewriter"></div>
+      <div class="subtitle">Every day is a second chance</div>
+      <div class="subtitle-cn">每一天都是新的开始</div>
+    </div>
+
+    <div class="about-me-container">
+      <div class="about-me-card">
+        <div class="about-me-content">
+          <div class="content-left">
+            <h2 class="about-me-title">
+              <i class="fas fa-user"></i> About Me
+            </h2>
+            <p class="bio-text">
+              I am an undergraduate student of Electrical Engineering at Rensselaer Polytechnic Institute. 
+              I developed this personal website purely out of interest in developing websites.
+            </p>
+          </div>
+          <div class="content-right">
+            <img src="assets/rpi-logo.png" alt="RPI Logo" class="school-logo">
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="about-me-container">
-            <div class="about-me-card">
-                <div class="about-me-content">
-                    <div class="content-left">
-                        <h2 class="about-me-title">
-                            <i class="fas fa-user"></i> About Me
-                        </h2>
-                        <p class="bio-text">
-                            I am an undergraduate student of Electrical Engineering at Rensselaer Polytechnic Institute. 
-                            I developed this personal website purely out of interest in developing websites.
-                        </p>
-                    </div>
-                    <div class="content-right">
-                        <img src="assets/rpi-logo.png" alt="RPI Logo" class="school-logo">
-                    </div>
-                </div>
-            </div>
+    <!-- My Channel 栏目 -->
+    <div class="channel-container">
+      <div class="channel-card">
+        <h2 class="channel-title">
+          <i class="fas fa-play-circle"></i> My Channel
+        </h2>
+        <div class="channel-content">
+          <div class="video-grid">
+            <!-- 视频项目们 -->
+            <a href="https://www.bilibili.com/video/BV16N1YYmEHK" target="_blank" class="video-item">
+              <div class="video-thumbnail">
+                <img src="assets/videos/video1.jpg" alt="Video 1">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-info">
+                <h3>美国男大学生考试周的学习和放松🤯 1</h3>
+                <p>美国大学生的考试周，学习压力大，但也有放松和娱乐的时间。</p>
+              </div>
+            </a>
+            <a href="https://www.bilibili.com/video/BV1HwijePEdq" target="_blank" class="video-item">
+              <div class="video-thumbnail">
+                <img src="assets/videos/video2.jpg" alt="Video 2">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-info">
+                <h3>VLOG03 | 美国大学生的宅家日常 2</h3>
+                <p>美国大学生的宅家日常，学习、做饭、玩游戏。</p>
+              </div>
+            </a>
+            <a href="https://www.bilibili.com/video/BV1JLbnesE8d" target="_blank" class="video-item">
+              <div class="video-thumbnail">
+                <img src="assets/videos/video3.jpg" alt="Video 3">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-info">
+                <h3>VLOG | 暑假日常 | 学习 | 看电影</h3>
+                <p>暑假日常，学习，看电影，做饭，玩游戏。</p>
+              </div>
+            </a>
+            <a href="https://www.bilibili.com/video/BV18hk5YTEwP" target="_blank" class="video-item">
+              <div class="video-thumbnail">
+                <img src="assets/videos/video4.jpg" alt="Video 4">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-info">
+                <h3>🌤🍃 早上来一起学习吗？/ STUDY WITH ME !</h3>
+                <p>早上来一起学习1小时，推荐 BGM 合集。</p>
+              </div>
+            </a>
+            <a href="https://www.bilibili.com/video/BV1HD421L7ky" target="_blank" class="video-item">
+              <div class="video-thumbnail">
+                <img src="assets/videos/video5.jpg" alt="Video 5">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="video-info">
+                <h3>VLOG | 男大学生 | 无课日常</h3>
+                <p>男大学生无课日常，学习，做饭，玩游戏。</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="channel-social">
+            <a href="https://space.bilibili.com/549722232" target="_blank" class="social-icon">
+              <i class="fab fa-bilibili"></i>
+            </a>
+            <a href="https://www.youtube.com/@lyd898" target="_blank" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/lyd_beeep/" target="_blank" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+  </main>
 
-        <!-- 添加 My Channel 栏目 -->
-        <div class="channel-container">
-            <div class="channel-card">
-                <h2 class="channel-title">
-                    <i class="fas fa-play-circle"></i> My Channel
-                </h2>
-                <div class="channel-content">
-                    <div class="video-grid">
-                        <!-- 视频项目 1 -->
-                        <a href="https://www.bilibili.com/video/BV16N1YYmEHK/?spm_id_from=333.999.0.0&vd_source=733d3d7b108d25d0038d4de1e84293db" target="_blank" class="video-item">
-                            <div class="video-thumbnail">
-                                <img src="assets/videos/video1.jpg" alt="Video 1">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="video-info">
-                                <h3>美国男大学生考试周的学习和放松🤯 1</h3>
-                                <p>美国大学生的考试周，学习压力大，但也有放松和娱乐的时间。</p>
-                            </div>
-                        </a>
+  <footer class="footer">
+    <p>© 2025 Yide Lin. All rights reserved.</p>
+    <p>Made with Passion and 🍪</p>
+  </footer>
 
-                        <!-- 视频项目 2 -->
-                        <a href="https://www.bilibili.com/video/BV1HwijePEdq/?spm_id_from=333.999.0.0&vd_source=733d3d7b108d25d0038d4de1e84293db" target="_blank" class="video-item">
-                            <div class="video-thumbnail">
-                                <img src="assets/videos/video2.jpg" alt="Video 2">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="video-info">
-                                <h3>VLOG03 | 美国大学生的宅家日常 2</h3>
-                                <p>美国大学生的宅家日常，学习、做饭、玩游戏。</p>
-                            </div>
-                        </a>
-
-                        <!-- 视频项目 3 -->
-                        <a href="https://www.bilibili.com/video/BV1JLbnesE8d/?spm_id_from=333.999.0.0&vd_source=733d3d7b108d25d0038d4de1e84293db" target="_blank" class="video-item">
-                            <div class="video-thumbnail">
-                                <img src="assets/videos/video3.jpg" alt="Video 3">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="video-info">
-                                <h3>VLOG | 暑假日常 | 学习 | 看电影</h3>
-                                <p>暑假日常，学习，看电影，做饭，玩游戏。</p>
-                            </div>
-                        </a>
-
-                        <!-- 视频项目 4 -->
-                        <a href="https://www.bilibili.com/video/BV18hk5YTEwP/?spm_id_from=333.999.0.0&vd_source=733d3d7b108d25d0038d4de1e84293db" target="_blank" class="video-item">
-                            <div class="video-thumbnail">
-                                <img src="assets/videos/video4.jpg" alt="Video 4">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="video-info">
-                                <h3>🌤🍃 早上来一起学习吗？/ STUDY WITH ME ! /1 小时 /推荐 BGM 合集</h3>
-                                <p>早上来一起学习1小时，推荐 BGM 合集。</p>
-                            </div>
-                        </a>
-
-                        <!-- 视频项目 5 -->
-                        <a href="https://www.bilibili.com/video/BV1HD421L7ky/?spm_id_from=333.999.0.0&vd_source=733d3d7b108d25d0038d4de1e84293db" target="_blank" class="video-item">
-                            <div class="video-thumbnail">
-                                <img src="assets/videos/video5.jpg" alt="Video 5">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="video-info">
-                                <h3>VLOG | 男大学生 | 无课日常</h3>
-                                <p>男大学生无课日常，学习，做饭，玩游戏。</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="channel-social">
-                        <a href="https://space.bilibili.com/549722232?spm_id_from=333.337.0.0" target="_blank" class="social-icon">
-                            <i class="fab fa-bilibili"></i>
-                        </a>
-                        <a href="https://www.youtube.com/@lyd898" target="_blank" class="social-icon">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://www.instagram.com/lyd_beeep/" target="_blank" class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <p>© 2025 Yide Lin. All rights reserved.</p>
-        <p>Made with Passion and 🍪</p>
-    </footer>
-
-    <script src="scripts/main.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
-</html> 
+</html>
