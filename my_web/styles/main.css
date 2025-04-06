@@ -555,7 +555,7 @@ body {
     z-index: 1001;
   }
   
-  /* ✅ 移动端专用 */
+  /* 移动端专用 */
   @media (max-width: 768px) {
     .navbar {
       flex-wrap: wrap;
