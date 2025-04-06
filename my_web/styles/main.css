@@ -546,22 +546,33 @@ body {
     font-size: 0.9em;
 } 
 
-/* ☰ 折叠菜单样式：默认隐藏，点击时显示 */
+/* 汉堡菜单按钮样式（默认隐藏） */
 .menu-toggle {
     display: none;
     font-size: 1.6em;
     color: white;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 2000; /* 提高层级防止被遮挡 */
+    position: relative;
   }
   
-  /* 移动端专用 */
+  /* 移动端适配样式 */
   @media (max-width: 768px) {
     .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       flex-wrap: wrap;
       flex-direction: column;
       align-items: center;
       padding: 10px 20px;
+      background: rgba(14, 21, 37, 0.9);
+      z-index: 1000;
+    }
+  
+    .home-content {
+      padding-top: 120px;
     }
   
     .menu-toggle {
@@ -587,12 +598,47 @@ body {
     }
   
     .nav-links a {
-      padding: 12px 0;
       font-size: 1.1em;
+      padding: 12px 0;
     }
   
     .nav-social {
       margin-top: 8px;
+    }
+  
+    .about-me-content {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .content-right {
+      width: 100px;
+      margin-top: 15px;
+    }
+  
+    .typewriter {
+      font-size: 2em;
+    }
+  
+    .subtitle {
+      font-size: 1.2em;
+    }
+  
+    .subtitle-cn {
+      font-size: 1em;
+    }
+  
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .video-info h3 {
+      font-size: 1em;
+    }
+  
+    .video-info p {
+      font-size: 0.85em;
     }
   }
   
