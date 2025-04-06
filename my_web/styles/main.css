@@ -546,64 +546,53 @@ body {
     font-size: 0.9em;
 } 
 
-/* ========== Mobile Responsive Patch ========== */
-@media (max-width: 768px) {
-    /* 导航栏改为纵向布局 */
+/* ☰ 折叠菜单样式：默认隐藏，点击时显示 */
+.menu-toggle {
+    display: none;
+    font-size: 1.6em;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  /* ✅ 移动端专用 */
+  @media (max-width: 768px) {
     .navbar {
+      flex-wrap: wrap;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      padding: 10px 15px;
+      padding: 10px 20px;
     }
   
-    /* 导航链接换行、缩小 */
+    .menu-toggle {
+      display: block;
+    }
+  
     .nav-links {
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
+      display: none;
+      flex-direction: column;
+      background: rgba(14, 21, 37, 0.95);
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 10px 0;
+      border-radius: 0 0 12px 12px;
+      text-align: center;
+    }
+  
+    .nav-links.active {
+      display: flex;
     }
   
     .nav-links a {
-      font-size: 0.9em;
-      padding: 6px 10px;
+      padding: 12px 0;
+      font-size: 1.1em;
     }
   
-    /* About Me 区域改为上下排布 */
-    .about-me-content {
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-    }
-  
-    .content-right {
-      width: 100px;
-      margin-top: 15px;
-    }
-  
-    /* 介绍文字缩小字体 */
-    .typewriter {
-      font-size: 2em;
-    }
-  
-    .subtitle {
-      font-size: 1.2em;
-    }
-  
-    .subtitle-cn {
-      font-size: 1em;
-    }
-  
-    /* 视频网格改为单列 */
-    .video-grid {
-      grid-template-columns: 1fr;
-    }
-  
-    .video-info h3 {
-      font-size: 1em;
-    }
-  
-    .video-info p {
-      font-size: 0.85em;
+    .nav-social {
+      margin-top: 8px;
     }
   }
   
