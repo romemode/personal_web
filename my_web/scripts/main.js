@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ✅ 汉堡菜单控制
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+
+    if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        const links = menu.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('active');
+            });
+        });
+    }
+
     // 打字机效果
     const typewriterElement = document.querySelector('.typewriter');
     const text = "Hi, I'm Yide Lin";
@@ -8,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < text.length) {
             typewriterElement.textContent += text.charAt(index);
             index++;
-            setTimeout(type, 125); // 可以调整打字速度
+            setTimeout(type, 150); // 可以调整打字速度
         }
     }
 
@@ -40,17 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('loginButton');
     const loginModal = document.getElementById('loginModal');
     const closeButton = document.querySelector('.close-button');
-    
+
     loginButton.addEventListener('click', () => {
         loginModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     });
-    
+
     closeButton.addEventListener('click', () => {
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     });
-    
+
     window.addEventListener('click', (event) => {
         if (event.target === loginModal) {
             loginModal.style.display = 'none';
@@ -68,4 +85,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-}); 
+});
