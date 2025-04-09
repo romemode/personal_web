@@ -23,7 +23,7 @@
             <a href="message.html" class="active">Message</a>
         </div>
         <div class="nav-social">
-            <a href="https://github.com/romemode" target="_blank" class="github-icon">
+            <a href="https://github.com/yourusername" target="_blank" class="github-icon">
                 <i class="fab fa-github"></i>
             </a>
             <div class="login-avatar" id="loginButton">
@@ -79,7 +79,40 @@
             </div>
 
             <div class="messages-list">
+                <!-- 消息将通过 JavaScript 动态添加 -->
             </div>
+            
+            <template id="message-template">
+                <div class="message-header">
+                    <img src="${avatar}" alt="User Avatar" class="message-avatar" onerror="this.src='../assets/avatar1.jpg'">
+                    <div class="message-info">
+                        <span class="message-author">${author || 'Anonymous'}</span>
+                        <span class="message-time">${time}</span>
+                    </div>
+                </div>
+                <div class="message-content">
+                    ${content}
+                </div>
+                <div class="message-actions">
+                    <button class="reply-button" data-message-id="${messageId}">
+                        <i class="fas fa-reply"></i> 回复
+                    </button>
+                </div>
+                <div class="reply-form" id="reply-form-${messageId}">
+                    <textarea class="reply-input" placeholder="写下你的回复..."></textarea>
+                    <div class="reply-form-actions">
+                        <input type="text" class="reply-name-input" placeholder="Anonymous">
+                        <div>
+                            <button class="reply-cancel-button">取消</button>
+                            <button class="reply-send-button">
+                                <i class="fas fa-paper-plane"></i> 发送
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="replies-container" id="replies-${messageId}"></div>
+                <div class="message-line"></div>
+            </template>
         </div>
     </main>
 
@@ -88,6 +121,7 @@
         <p>Made with Passion and 🍪</p>
     </footer>
 
+    <!-- 使用模块方式加载 message.js（支持 Firebase 模块语法） -->
     <script src="../scripts/auth.js"></script>
     <script type="module" src="../scripts/message.js"></script>
 </body>
