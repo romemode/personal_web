@@ -1,6 +1,6 @@
 // 导入Firebase所需模块
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, query, orderBy, limit } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 // Firebase配置
 const firebaseConfig = {
@@ -161,8 +161,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // 添加回复到Firebase
     async function addReply(messageId, content, avatar, time, author) {
         try {
-            // 获取消息文档引用
-            const messageRef = doc(db, "messages", messageId);
+            // 获取消息元素
+            const messageElement = document.querySelector(`.message-item[data-message-id="${messageId}"]`);
+            if (!messageElement) {
+                console.error("未找到消息元素，ID:", messageId);
+                return;
+            }
+            
+            // 尝试从元素的data属性获取Firebase文档ID
+            let docId = messageElement.dataset.firebaseId;
+            
+            // 如果没有存储的Firebase ID，则通过查询获取
+            if (!docId) {
+                console.log("未找到存储的Firebase ID，尝试通过查询获取");
+                const messagesRef = collection(db, "messages");
+                const q = query(messagesRef, where("id", "==", messageId));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    console.error("未找到消息ID为", messageId, "的文档");
+                    return;
+                }
+                
+                docId = querySnapshot.docs[0].id;
+                // 存储找到的Firebase ID以便将来使用
+                messageElement.dataset.firebaseId = docId;
+                console.log("已找到并存储Firebase ID:", docId);
+            }
+            
+            const messageRef = doc(db, "messages", docId);
             
             // 更新消息文档，添加回复
             await updateDoc(messageRef, {
@@ -175,9 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             // 显示回复
-            const messageElement = document.querySelector(`.message-item[data-message-id="${messageId}"]`);
             const repliesContainer = messageElement.querySelector('.replies-container');
             displayReply(repliesContainer, content, avatar, time, author);
+            console.log("回复已添加到文档:", docId);
         } catch (error) {
             console.error("添加回复时出错:", error);
         }
@@ -186,7 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 保存消息到Firebase
     async function saveMessage(content, avatar, time, author, messageId, replies = []) {
         try {
-            await addDoc(collection(db, "messages"), {
+            // 添加文档并获取文档引用
+            const docRef = await addDoc(collection(db, "messages"), {
                 id: messageId,
                 content,
                 avatar,
@@ -195,6 +223,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 replies,
                 timestamp: new Date() // 用于排序
             });
+            
+            // 将Firebase生成的文档ID存储在元素的data属性中
+            const messageElement = document.querySelector(`.message-item[data-message-id="${messageId}"]`);
+            if (messageElement) {
+                messageElement.dataset.firebaseId = docRef.id;
+            }
+            
+            console.log("消息已保存，Firebase ID:", docRef.id, "自定义ID:", messageId);
         } catch (error) {
             console.error("保存消息时出错:", error);
         }
@@ -256,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 显示消息
             querySnapshot.forEach((doc) => {
                 const msgData = doc.data();
-                displayMessage(
+                const messageElement = displayMessage(
                     msgData.content, 
                     msgData.avatar, 
                     msgData.time, 
@@ -265,6 +301,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     msgData.replies || [], 
                     false
                 );
+                
+                // 存储Firebase文档ID到消息元素
+                if (messageElement) {
+                    messageElement.dataset.firebaseId = doc.id;
+                    console.log("已加载消息，Firebase ID:", doc.id, "自定义ID:", msgData.id);
+                }
             });
         } catch (error) {
             console.error("加载消息时出错:", error);
