@@ -1,3 +1,21 @@
+// 导入Firebase所需模块
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, query, orderBy, limit } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
+// Firebase配置
+const firebaseConfig = {
+    apiKey: "AIzaSyBnNwmEmlKSMBjw6yQXbOmHH8dyQPRj4JA",
+    authDomain: "my-web-message-board.firebaseapp.com",
+    projectId: "my-web-message-board",
+    storageBucket: "my-web-message-board.appspot.com",
+    messagingSenderId: "123456789012",
+    appId: "1:123456789012:web:abcdef1234567890abcdef"
+};
+
+// 初始化Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.querySelector('.message-input');
     const nameInput = document.querySelector('.name-input');
@@ -139,38 +157,49 @@ document.addEventListener('DOMContentLoaded', () => {
         return replyElement;
     }
     
-    // 添加回复
-    function addReply(messageId, content, avatar, time, author) {
-        // 保存回复到localStorage
-        const savedMessages = localStorage.getItem('messages');
-        const messages = savedMessages ? JSON.parse(savedMessages) : [];
-        
-        const messageIndex = messages.findIndex(msg => msg.id === messageId);
-        if (messageIndex !== -1) {
-            if (!messages[messageIndex].replies) {
-                messages[messageIndex].replies = [];
-            }
+    // 添加回复到Firebase
+    async function addReply(messageId, content, avatar, time, author) {
+        try {
+            // 获取消息文档引用
+            const messageRef = doc(db, "messages", messageId);
             
-            const reply = { content, avatar, time, author };
-            messages[messageIndex].replies.push(reply);
-            localStorage.setItem('messages', JSON.stringify(messages));
+            // 更新消息文档，添加回复
+            await updateDoc(messageRef, {
+                replies: arrayUnion({
+                    content, 
+                    avatar, 
+                    time, 
+                    author
+                })
+            });
             
             // 显示回复
             const messageElement = document.querySelector(`.message-item[data-message-id="${messageId}"]`);
             const repliesContainer = messageElement.querySelector('.replies-container');
             displayReply(repliesContainer, content, avatar, time, author);
+        } catch (error) {
+            console.error("添加回复时出错:", error);
         }
     }
 
-    // 保存消息到 localStorage
-    function saveMessage(content, avatar, time, author, messageId, replies = []) {
-        const savedMessages = localStorage.getItem('messages');
-        const messages = savedMessages ? JSON.parse(savedMessages) : [];
-        messages.unshift({ id: messageId, content, avatar, time, author, replies });
-        localStorage.setItem('messages', JSON.stringify(messages));
+    // 保存消息到Firebase
+    async function saveMessage(content, avatar, time, author, messageId, replies = []) {
+        try {
+            await addDoc(collection(db, "messages"), {
+                id: messageId,
+                content,
+                avatar,
+                time,
+                author,
+                replies,
+                timestamp: new Date() // 用于排序
+            });
+        } catch (error) {
+            console.error("保存消息时出错:", error);
+        }
     }
 
-    function sendMessage() {
+    async function sendMessage() {
         const message = messageInput.value.trim();
         if (!message) return;
 
@@ -189,8 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 显示消息
         displayMessage(message, randomAvatar, currentTime, author, messageId, []);
 
-        // 保存消息
-        saveMessage(message, randomAvatar, currentTime, author, messageId, []);
+        // 保存消息到Firebase
+        await saveMessage(message, randomAvatar, currentTime, author, messageId, []);
         
         // 清空消息输入框
         messageInput.value = '';
@@ -213,29 +242,34 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.style.height = messageInput.scrollHeight + 'px';
     });
 
-    // 加载保存的消息
-    const savedMessages = localStorage.getItem('messages');
-    if (savedMessages) {
-        const messages = JSON.parse(savedMessages);
-        
-        // 检查并更新旧格式的消息数据
-        const updatedMessages = messages.map(msg => {
-            if (!msg.id) {
-                msg.id = generateId();
-            }
-            if (!msg.replies) {
-                msg.replies = [];
-            }
-            return msg;
-        });
-        
-        // 如果有更新，保存回localStorage
-        if (JSON.stringify(messages) !== JSON.stringify(updatedMessages)) {
-            localStorage.setItem('messages', JSON.stringify(updatedMessages));
+    // 从Firebase加载消息
+    async function loadMessages() {
+        try {
+            // 创建查询，按时间戳降序排列，限制获取最新的50条消息
+            const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), limit(50));
+            const querySnapshot = await getDocs(q);
+            
+            // 清空消息列表
+            messagesList.innerHTML = '';
+            
+            // 显示消息
+            querySnapshot.forEach((doc) => {
+                const msgData = doc.data();
+                displayMessage(
+                    msgData.content, 
+                    msgData.avatar, 
+                    msgData.time, 
+                    msgData.author, 
+                    msgData.id, 
+                    msgData.replies || [], 
+                    false
+                );
+            });
+        } catch (error) {
+            console.error("加载消息时出错:", error);
         }
-        
-        updatedMessages.forEach(msg => {
-            displayMessage(msg.content, msg.avatar, msg.time, msg.author, msg.id, msg.replies, false);
-        });
     }
+
+    // 页面加载时获取消息
+    loadMessages();
 });
