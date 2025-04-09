@@ -4,12 +4,13 @@ import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, 
 
 // Firebase配置
 const firebaseConfig = {
-    apiKey: "AIzaSyBnNwmEmlKSMBjw6yQXbOmHH8dyQPRj4JA",
-    authDomain: "my-web-message-board.firebaseapp.com",
-    projectId: "my-web-message-board",
-    storageBucket: "my-web-message-board.appspot.com",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef1234567890abcdef"
+    apiKey: "AIzaSyC5f7HU_U--ecfKIHVHIyh619UOs1SGQU8",
+    authDomain: "myweb-31c5c.firebaseapp.com",
+    projectId: "myweb-31c5c",
+    storageBucket: "myweb-31c5c.firebasestorage.app",
+    messagingSenderId: "700628302270",
+    appId: "1:700628302270:web:55fd72a38839f31bc421ef",
+    measurementId: "G-E1VMNJW386"
 };
 
 // 初始化Firebase
