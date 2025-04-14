@@ -1,6 +1,6 @@
 // 导入Firebase所需模块
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, arrayUnion, query, orderBy, limit, where, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 // Firebase配置
 const firebaseConfig = {
@@ -127,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // 显示已有的回复
         if (replies && replies.length > 0) {
             const repliesContainer = messageElement.querySelector(`.replies-container`);
+            // 清空回复容器，确保不会有重复显示
+            repliesContainer.innerHTML = '';
+            // 添加回复计数
+            console.log(`显示消息 ${messageId} 的 ${replies.length} 条回复`);
             replies.forEach(reply => {
                 displayReply(repliesContainer, reply.content, reply.avatar, reply.time, reply.author);
             });
@@ -279,37 +283,60 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.style.height = messageInput.scrollHeight + 'px';
     });
 
-    // 从Firebase加载消息
-    async function loadMessages() {
+    // 从Firebase加载消息并实时监听变化
+    function loadMessages() {
         try {
             // 创建查询，按时间戳降序排列，限制获取最新的50条消息
             const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), limit(50));
-            const querySnapshot = await getDocs(q);
             
-            // 清空消息列表
-            messagesList.innerHTML = '';
-            
-            // 显示消息
-            querySnapshot.forEach((doc) => {
-                const msgData = doc.data();
-                const messageElement = displayMessage(
-                    msgData.content, 
-                    msgData.avatar, 
-                    msgData.time, 
-                    msgData.author, 
-                    msgData.id, 
-                    msgData.replies || [], 
-                    false
-                );
+            // 设置实时监听器，使用includeMetadataChanges选项以确保捕获所有变化
+            const unsubscribe = onSnapshot(q, { includeMetadataChanges: true }, (querySnapshot) => {
+                console.log("检测到数据变化，类型:", querySnapshot.metadata.hasPendingWrites ? "本地" : "服务器");
                 
-                // 存储Firebase文档ID到消息元素
-                if (messageElement) {
-                    messageElement.dataset.firebaseId = doc.id;
-                    console.log("已加载消息，Firebase ID:", doc.id, "自定义ID:", msgData.id);
+                // 清空消息列表，确保UI与数据库同步
+                messagesList.innerHTML = '';
+                
+                // 如果没有文档，显示提示信息
+                if (querySnapshot.empty) {
+                    console.log("没有消息数据");
+                    return;
                 }
+                
+                // 显示消息
+                querySnapshot.forEach((doc) => {
+                    const msgData = doc.data();
+                    // 确保文档有效
+                    if (!msgData || !msgData.id) {
+                        console.warn("跳过无效文档:", doc.id);
+                        return;
+                    }
+                    
+                    const messageElement = displayMessage(
+                        msgData.content, 
+                        msgData.avatar, 
+                        msgData.time, 
+                        msgData.author, 
+                        msgData.id, 
+                        msgData.replies || [], 
+                        false
+                    );
+                    
+                    // 存储Firebase文档ID到消息元素
+                    if (messageElement) {
+                        messageElement.dataset.firebaseId = doc.id;
+                        console.log("已加载消息，Firebase ID:", doc.id, "自定义ID:", msgData.id);
+                    }
+                });
+                
+                console.log("实时数据监听已设置，消息列表已更新，文档数量:", querySnapshot.size);
+            }, (error) => {
+                console.error("监听消息变化时出错:", error);
             });
+            
+            // 返回取消监听的函数，以便在需要时可以停止监听
+            return unsubscribe;
         } catch (error) {
-            console.error("加载消息时出错:", error);
+            console.error("设置消息监听时出错:", error);
         }
     }
 
