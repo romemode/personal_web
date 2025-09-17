@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ✅ 汉堡菜单控制
     const toggle = document.getElementById('menuToggle');
     const menu = document.getElementById('mobileMenu');
 
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 打字机效果
     const typewriterElement = document.querySelector('.typewriter');
     const text = "Hi, I'm Yide Lin";
     let index = 0;
@@ -25,14 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < text.length) {
             typewriterElement.textContent += text.charAt(index);
             index++;
-            setTimeout(type, 150); // 可以调整打字速度
+            setTimeout(type, 150); // type speed
         }
     }
 
-    // 开始打字效果
     type();
 
-    // 其他动画效果
     setTimeout(() => {
         document.querySelector('.subtitle').style.opacity = '1';
         document.querySelector('.subtitle').style.transform = 'translateY(0)';
@@ -53,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.channel-container').style.transform = 'translateY(0)';
     }, 4000);
 
-    // 登录相关代码
     const loginButton = document.getElementById('loginButton');
     const loginModal = document.getElementById('loginModal');
     const closeButton = document.querySelector('.close-button');
@@ -86,3 +81,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
